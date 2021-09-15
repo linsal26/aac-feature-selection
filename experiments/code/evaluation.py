@@ -16,12 +16,12 @@ from functools import reduce
 
 # Legends
 # aac - Attribute average conflict based method
-# ac - Attribute conflict (G3-error) based method
+# g3 - G3-error based method
 # urs - Uniform random sampling based method
 # Swope - Adaptive random sampling top-$k$ feature selection as proposed in https://dl.acm.org/doi/abs/10.1145/3448016.3457255?casa_token=WD7S49Hs3i4AAAAA:0W6GIP0LCY7NrJmYfbyk1T5IWcfJVV6bzfBBsMIctIVkAw6Wst5H2kUpma0CTjReCG04ex5tBYKOdQ
 # mi - Exact MI calculation based metho
 measures_to_compute = ['aac',
-                       'ac', 'urs', 'swope', 'mi']
+                       'g3', 'urs', 'swope', 'mi']
 
 
 file_name_column = list()
@@ -534,7 +534,7 @@ def cacluate_runtime_swope(fo, file_prefix, df, X, Z, k, p_f, epsilon, cache, it
     run_time[file_prefix]['swope'] = avg_runtime_swope
 
 
-def calculate_runtime_ac(fo, file_prefix, df, X, Z, k, cache, iterations=1):
+def calculate_runtime_g3(fo, file_prefix, df, X, Z, k, cache, iterations=1):
     global sorted_features, run_time
     global attr_mi_map
 
@@ -550,16 +550,16 @@ def calculate_runtime_ac(fo, file_prefix, df, X, Z, k, cache, iterations=1):
 
         # using ac
         start_time = time.perf_counter()
-        sorted_features[file_prefix]['ac'] = feature_importance.sort_feature_by_ac(
+        sorted_features[file_prefix]['g3'] = feature_importance.sort_feature_by_g3(
             fo,  df, X, Z, k, cache)
         end_time = time.perf_counter()
 
         run_time_iteration.append(end_time - start_time)
 
-    avg_runtime_ac = reduce(
+    avg_runtime_g3 = reduce(
         lambda a, b: a + b, run_time_iteration) / len(run_time_iteration)
 
-    run_time[file_prefix]['ac'] = avg_runtime_ac
+    run_time[file_prefix]['g3'] = avg_runtime_g3
 
 
 def calculate_runtime_aac(fo, file_prefix, df, X, Z, k, cache, iterations=1):
@@ -621,8 +621,8 @@ def calculate_runtime(fo, k, iterations, file_prefix, df, dependent_variable_nam
         cacluate_runtime_mi_sampled(
             fo, file_prefix, sample_size, df, X, Z, k, mi_calculation_using_joint_entropy, cache, iterations)
 
-    if 'ac' in measures_to_compute:
-        calculate_runtime_ac(
+    if 'g3' in measures_to_compute:
+        calculate_runtime_g3(
             fo, file_prefix, df, X, Z, k, cache, iterations)
 
     if 'aac' in measures_to_compute:
@@ -637,9 +637,6 @@ def calculate_runtime(fo, k, iterations, file_prefix, df, dependent_variable_nam
                          k, mi_calculation_using_joint_entropy, cache, iterations)
 
     fo.write("\n#####################{}########################".format(file_prefix))
-
-    # methods = ['ac', 'aac',
-    #            'conflict', 'urs', 'swope', 'mi']
 
     for method in measures_to_compute:
         write_to_file(fo, file_prefix, method)
@@ -707,9 +704,8 @@ def main():
     # MI(a,b) = sum_(a)sum_(b)p(a,b)log_2(p(a,b)/p(a) * p(b))
     mi_calculation_using_joint_entropy = True
 
-    # change this to control the average runtime for each method
+    # how many iterations for running each method; an average runtime is calculated based on this
     runtime_iterations = 3
-
 
     # contains the text file listing the top-k attributes for different methods along with score
     resultFolder = 'text_output'

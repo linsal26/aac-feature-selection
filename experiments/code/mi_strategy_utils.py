@@ -1,4 +1,3 @@
-# GiG
 import math
 from math import log, ceil, sqrt
 import numpy as np
@@ -183,7 +182,7 @@ def compute_b_attr_Z_pair(df, attr, Z, M, N):
     return log(1 + ((u_alpha_Z_pair - 1) * (N - M) / M * (N - 1)), 2)
 
 
-def compute_ac(df,  attr, target, cache=False):
+def compute_g3(df,  attr, target, cache=False):
 
     # N = len(df)
     variables = [attr, target]
@@ -203,13 +202,13 @@ def compute_ac(df,  attr, target, cache=False):
 
     # print(val_map)
 
-    ac = 0
+    g3 = 0
     for val in val_map:
         values_to_compare = val_map[val].values()
         if len(values_to_compare) > 1:
-            ac += min(values_to_compare)
+            g3 += min(values_to_compare)
 
-    return ac
+    return g3
 
 
 def compute_aac(df,  attr, target, cache=False):

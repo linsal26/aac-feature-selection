@@ -1,5 +1,3 @@
-# GiG
-
 import mi_strategy_utils
 
 from math import log, ceil
@@ -313,14 +311,14 @@ def sort_feature_by_swope(fo,  df, X, Z, k, p_f, epsilon, cache):
     return R
 
 
-def sort_feature_by_ac(fo,  df, X, Z, k, cache):
+def sort_feature_by_g3(fo,  df, X, Z, k, cache):
     ac_dict = {}
 
     for attr in X:
-        ac_dict[attr] = mi_strategy_utils.compute_ac(
+        ac_dict[attr] = mi_strategy_utils.compute_g3(
             df,  attr, Z, cache)
     fo.write("\n.........................\n")
-    fo.write("G-3 Error:")
+    fo.write("G3 Error:")
     fo.write("\n No of records considered: {}\n".format(len(df)))
     fo.write(str(ac_dict))
     fo.write("\n.........................\n")
