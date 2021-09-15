@@ -705,7 +705,7 @@ def main():
     mi_calculation_using_joint_entropy = True
 
     # how many iterations for running each method; an average runtime is calculated based on this
-    runtime_iterations = 3
+    runtime_iterations = 1
 
     # contains the text file listing the top-k attributes for different methods along with score
     resultFolder = 'text_output'
