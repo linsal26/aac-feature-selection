@@ -13,12 +13,16 @@ Experimental comparison of the new measure Attribute average Conflict with exact
    will produce dataset with different distribution. Please see the comment in the code for parameter setting.
 
 2. Once a datafile is generated, copy the file to the location - 'experiments/code/data_files/', then running the file 'experiments/code/evaluation.py'
-   will produce experimental result in csv format. The csv files will be located inside 'experiments/code/output_csv_files/'. Text file with the generated features along with scores
-   using various methods will be generated inside 'experiments/code/text_output/' folder.
+   will produce experimental result in csv format. 
+ 
+3. Make sure 'output_csv_files' and 'text_output' directories are present in the same location of evaluation.py file.
 
-3. The program expects target variable (Z) name as 'Outcome'. Please rename the class/target column in the data file as 'Outcome' if any other name is present.
+4. The output csv files will be located inside 'experiments/code/output_csv_files/'. Text file with the generated features along with scores
+   using various methods will be generated inside 'experiments/code/text_output/' directory.
 
-3. The program expects discrete attribute and target variable. You need to discretize any continuous valued-attribute using suitable method before using in this program.
+5. The program expects target variable (Z) name as 'Outcome'. Please rename the class/target column in the data file as 'Outcome' if any other name is present.
+
+6. The program expects discrete attribute and target variable. You need to discretize any continuous valued-attribute using suitable method before using in this program.
    Put the datafile inside 'experiments/data_files/' directory before running evaluation.py
 
 
