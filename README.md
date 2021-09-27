@@ -25,4 +25,7 @@ Experimental comparison of the new measure Attribute average Conflict with exact
 6. The program expects discrete attribute and target variable. You need to discretize any continuous valued-attribute using suitable method before using in this program.
    Put the datafile inside 'experiments/data_files/' directory before running evaluation.py
 
+7. UCI datasets stated in the paper are provided under '/experiments/data/'  directory. Please unzip any zipped file and place under 'experiments/code/data_files/'
+   directory in order to run the experiment using the file.
+
 
