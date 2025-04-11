@@ -1,5 +1,5 @@
 # aac-feature-selection
-Experimental comparison of the new measure Attribute average Conflict with exact MI and other relevant methods
+Experimental comparison of the new measure Attribute average Conflict with exact MI and other relevant methods proposed in this journal publication - Salam, M. A., Basu Roy, S., & Das, G. (2023). Efficient approximate top-k mutual information based feature selection. Journal of Intelligent Information Systems, 61(1), 191-223.
 
 
 # Requirements for running the code
